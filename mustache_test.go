@@ -155,6 +155,7 @@ var tests = []Test{
 
 	//lambda tests
 	{`{{#Lambda}}{{#Test}}abcd{{/Test}}{{/Lambda}}`, &struct{ Lambda func(params []string, in string) string }{Lambda: func(params []string, in string) string { return in }}, "{{#Test}}abcd{{/Test}}"},
+	{`{{#Lambda}}{{value}}qpr{{/Lambda}}`, &struct{ Lambda func(params []string, in string) string }{Lambda: func(params []string, in string) string { return in }}, "{{value}}qpr"},
 	{`{{#Show}}{{#Lambda}}efgh{{/Lambda}}{{/Show}}`, &struct {
 		Show   bool
 		Lambda func(params []string, in string) string

@@ -171,7 +171,6 @@ func (tmpl *Template) parseSection(section *sectionElement) error {
 	for {
 
 		text, err := tmpl.readString(tmpl.otag)
-
 		if err == io.EOF {
 			return parseError{section.startline, "Section " + section.name + " has no closing tag"}
 		}
@@ -188,7 +187,6 @@ func (tmpl *Template) parseSection(section *sectionElement) error {
 		} else {
 			text, err = tmpl.readString(tmpl.ctag)
 		}
-
 		if err == io.EOF {
 			//put the remaining text in a block
 			return parseError{tmpl.curline, "unmatched open tag"}
@@ -282,6 +280,7 @@ func (tmpl *Template) parseSection(section *sectionElement) error {
 			}
 		default:
 			section.elems = append(section.elems, &varElement{tag, false})
+			section.writeRawBody("{{" + tag + "}}")
 		}
 	}
 
